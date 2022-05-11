@@ -10,7 +10,7 @@ const int IN2 = 9;
 const int buzzer = 12;
 
 //Code constants
-const int threshold = 91;
+const int threshold = 88;
 const int good_max = 104;
 const int bad_time = 10; // consecutive seconds of bad posture that trigger the buzzer
 const int too_long = 20; // consecutive seconds of sitting in the same place (confined posture range) that trigger the buzzer
@@ -115,7 +115,9 @@ else {
       startMotor();
       user_state = 3;
       Serial.println(String(user_state) + "," + String(flex_ADC) + "," + String(counter) + "," + String(how_long));
-      massage(5000);       
+      massage(5000); 
+      digitalWrite(IN1, LOW);
+      digitalWrite(IN2, LOW);      
       user_state = 0;
      }
     
@@ -135,8 +137,8 @@ else {
 }
 
 void startMotor(){
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
   for (int i = 0; i < 256; i++) {
     analogWrite(ENA, i);
     delay(4);
@@ -147,5 +149,5 @@ void massage(int i) {
     analogWrite(ENA, 255); //Not needed but safer
     //Serial.println("Massaging...");
     delay(i);
-}
+  }
     
