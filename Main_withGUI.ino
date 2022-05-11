@@ -113,6 +113,8 @@ else {
 
     if ( (how_long%relief) == 0 && how_long != 0 && how_long != too_long ) {
       startMotor();
+      user_state = 3;
+      Serial.println(String(user_state) + "," + String(flex_ADC) + "," + String(counter) + "," + String(how_long));
       massage(5000);       
       user_state = 0;
      }
